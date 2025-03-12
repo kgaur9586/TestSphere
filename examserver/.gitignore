@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+examserver/target/
+*.jar
+*.class
+*.log
+*.dumpstream
