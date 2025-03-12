@@ -9,11 +9,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.exam.examserver.entities.User;
 import com.exam.examserver.repositories.UserRepository;
 
 @Service
+@Transactional
 public class UserDetailServiceImpl implements UserDetailsService {
     
     @Autowired
