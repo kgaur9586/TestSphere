@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "node dist/frontend/server/main.js",
-    "prebuild": "npm install",
-    "build": "ng build --configuration=production",
+    "prebuild": "npm install -g @angular/cli@latest && npm install",
+    "build": "npx ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:frontend": "node dist/frontend/server/server.mjs"
