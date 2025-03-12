@@ -24,7 +24,7 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
   standalone: true,
   imports: [
     RouterOutlet,
-    NgxUiLoaderModule, // Keep this for loader directives
+    NgxUiLoaderModule, 
     MatProgressSpinnerModule,
     MatProgressBarModule,
     CKEditorModule,
