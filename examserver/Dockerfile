@@ -1,5 +1,5 @@
-# Use Maven with Java 23 to build the app
-FROM maven:3.9.6-eclipse-temurin-23 AS builder
+# Use Maven with Java 21 to build the app
+FROM maven:3.9.6-eclipse-temurin-21 AS builder
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -12,8 +12,8 @@ RUN mvn dependency:go-offline
 COPY examserver/src ./src
 RUN mvn clean package -DskipTests
 
-# Use Java 23 for running the app
-FROM eclipse-temurin:23-jdk
+# Use Java 21 for running the app
+FROM eclipse-temurin:21-jdk
 
 # Set the working directory inside the container
 WORKDIR /app
