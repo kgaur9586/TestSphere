@@ -10,7 +10,6 @@ import java.util.List;
 
 public class CorsConfig {
 
-    @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowedOrigins(List.of("http://localhost:4200")); 

@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.exam.examserver.ExamserverApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.46 s -- in com.exam.examserver.ExamserverApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.01 s -- in com.exam.examserver.ExamserverApplicationTests
