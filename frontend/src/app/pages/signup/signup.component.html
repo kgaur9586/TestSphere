@@ -1,0 +1,43 @@
+<div class="floating-shapes" #shapesContainer></div>
+
+<div class="form-container" [class.shake]="isInvalid" #formContainer>
+  <h1 class="form-title">Register here.. 🎪</h1>
+  <form (ngSubmit)="onSubmit()" #registrationForm="ngForm">
+    <div class="input-group">
+      <input type="text" class="input" name="firstName" [(ngModel)]="user.firstName" required 
+             placeholder="First Name">
+    </div>
+    <div class="input-group">
+      <input type="text" class="input" name="lastName" [(ngModel)]="user.lastName" required
+             placeholder="Last Name">
+    </div>
+    <div class="input-group">
+      <input type="email" class="input" name="email" [(ngModel)]="user.email" required
+             placeholder="Email (must be unique)">
+    </div>
+    <div class="input-group">
+      <input type="text" class="input" name="username" [(ngModel)]="user.username" required
+             placeholder="Username (must be unique)">
+             
+    </div>
+    <div class="input-group">
+      <input 
+  type="password" 
+  class="input" 
+  name="password" 
+  [(ngModel)]="user.password" 
+  required
+  [type]="showPassword ? 'text' : 'password'" 
+  (input)="updatePasswordStrength($event)"
+  placeholder="Password">
+
+      <span class="toggle-password" (click)="togglePassword()">👁️</span>
+      <span class="password-strength">{{strengthEmoji}}</span>
+    </div>
+    <button type="submit" class="submit-btn">Submit 🚀</button>
+  </form>
+</div>
+
+<div class="welcome-message" *ngIf="showWelcome">
+  Registration Successful.. 🎉
+</div>

@@ -1,0 +1,187 @@
+
+
+.horizontal-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+.category-block {
+  margin-bottom: 40px;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  padding-left: 16px;
+}
+
+/* Scroll Wrapper */
+.scroll-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  padding: 10px 0;
+}
+.category-title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #3f51b5;
+}
+
+/* Scroll Buttons */
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+}
+.icon-spacing {
+  margin-right: 12px;
+}
+
+.scroll-btn.left {
+  left: 10px;
+}
+
+.scroll-btn.right {
+  right: 10px;
+}
+
+/* Scrollable Container */
+.scroll-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 15px;
+  padding: 10px;
+  white-space: nowrap;
+}
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+.scroll-item {
+  flex: 0 0 auto;
+  min-width: 280px;
+  max-width: 100%;
+}
+
+/* Quiz Grid */
+.quiz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
+  padding: 10px;
+}
+
+/* Quiz Card */
+.quiz-card {
+  transition: transform 0.3s ease-in-out;
+}
+.quiz-card {
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+.mat-card-content {
+  white-space: normal;
+  word-wrap: break-word;
+}
+.quiz-card:hover {
+  transform: scale(1.05);
+}
+.icon {
+  font-size: 24px; 
+  color: #ff9ff3;
+}
+/* Button Container */
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.truncate{
+  display: block;
+  white-space:nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+mat-card-header {
+  display: flex;
+  width: 100%;
+  min-width: 0; /* Add this line */
+}
+
+mat-card-title {
+  white-space: nowrap; /* Add these 3 lines */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* If you need to target specifically the quiz cards */
+.quiz-card mat-card-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+
+
+
+
+/* Responsive Media Queries */
+/* Modify the media query section */
+@media (max-width: 768px) {
+  .scroll-wrapper {
+    padding: 10px 40px; /* Add space for scroll buttons */
+  }
+
+  .scroll-item {
+    min-width: 260px; /* Fixed width for mobile items */
+    max-width: 260px; /* Prevent overflow */
+  }
+
+  .scroll-btn {
+    padding: 8px; /* Smaller buttons */
+    transform: translateY(-60%); /* Adjust vertical position */
+  }
+
+  .quiz-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+
+  /* Optional: Hide buttons on very small screens */
+}
+
+
+  
+  
+.example-header-image {
+  background-image: url('../../../assets/exam.png');
+  background-size: cover;
+}
+.title {
+  margin: 0; 
+  font-size: 37px; 
+  font-weight: bold;
+  background: linear-gradient(45deg, #ff9ff3, #25c6ea); 
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent;
+}

@@ -1,0 +1,29 @@
+<div class="floating-shapes" #shapesContainer></div>
+
+<div class="form-container" [class.shake]="isInvalid" #formContainer>
+  <h1 class="form-title">Login here.. 🎪</h1>
+  <form (ngSubmit)="onSubmit()" #registrationForm="ngForm">
+    
+    <div class="input-group">
+      <input type="text" class="input" name="username" [(ngModel)]="user.username" required
+             placeholder="Enter Username">
+             
+    </div>
+    <div class="input-group">
+      <input 
+  type="password" 
+  class="input" 
+  name="password" 
+  [(ngModel)]="user.password" 
+  required
+  [type]="showPassword ? 'text' : 'password'" 
+  placeholder="Enter Password">
+
+    </div>
+    <button type="submit" class="submit-btn">Submit 🚀</button>
+  </form>
+</div>
+
+<div class="welcome-message" *ngIf="showWelcome">
+  Login Successful.. 🎉
+</div>

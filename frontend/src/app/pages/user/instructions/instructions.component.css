@@ -1,0 +1,10 @@
+.custom-font {
+    font-size: 15px !important;
+    margin-left: 20px;  /* Force font size */
+}
+.text-center{
+    display: inline;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,51 @@
+
+
+<mat-card *ngIf="user">
+    <h1>Update Your Profile Details</h1>
+    <mat-card-content>
+        <div class="bootstrap-wrapper">
+            <div class="container">
+                <div class="container text-center" >
+                    <img src="../../../assets/kapil.jpg" alt="" class="profile-image">
+                    <h1 class="profile-name">{{user.firstName}} {{user.lastName}}</h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 offset-md-1">
+                      
+                        <table class="table text-center">
+                                <tr>
+                                    <td>Username</td>
+                                    <td><input matInput type="text" name="username" [(ngModel)]="user.username"></td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td><input matInput type="text" name="email" [(ngModel)]="user.email"></td>
+                                </tr>
+                                <tr>
+                                    <td>Phone</td>
+                                    <td><input matInput type="text" name="phone" [(ngModel)]="user.phone"></td>
+                                </tr>
+                                <tr>
+                                    <td>FirstName</td>
+                                    <td><input matInput type="text" name="firstName" [(ngModel)]="user.firstName"></td>
+                                </tr>
+                                <tr>
+                                    <td>LastName</td>
+                                    <td><input matInput type="text" name="lastName" [(ngModel)]="user.lastName"></td>
+                                </tr>
+                                <tr>
+                                    <td>Password</td>
+                                    <td><input matInput type="text" name="password" [(ngModel)]="user.password"></td>
+                                </tr>
+                                
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+    <mat-card-actions class="text-center">
+        <button mat-raised-button (click)="updateUser(user)">Update</button>
+    </mat-card-actions>
+
+</mat-card>

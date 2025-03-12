@@ -1,0 +1,144 @@
+:host {
+    display: block;
+    min-height: 100vh;
+    background: linear-gradient(45deg, #ff9ff3, #48dbfb);
+    overflow: hidden;
+  }
+  
+  .floating-shapes {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+  }
+  
+  .float {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    animation: float 8s infinite linear;
+  }
+  
+  .form-container {
+    position: relative;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem 3rem;
+    border-radius: 30px;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
+    transform: rotate(-1deg);
+    transition: transform 0.3s ease;
+    margin: 2rem auto;
+    max-width: 500px;
+  
+    &:hover {
+      transform: rotate(1deg);
+    }
+  
+    &.shake {
+      animation: shake 0.5s;
+    }
+  }
+  
+  .form-title {
+    text-align: center;
+    color: #e84393;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 0 #6decb9;
+  }
+  
+  .input-group {
+    position: relative;
+    margin: 1.5rem 0;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 1rem;
+    border: 3px solid #6decb9;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.8);
+  
+    &:focus {
+      outline: none;
+      border-color: #ff9ff3;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #ff9ff3;
+    }
+  }
+  
+  .password-strength {
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #48dbfb;
+  }
+  
+  .submit-btn {
+    background: linear-gradient(45deg, #ff9ff3, #48dbfb);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    width: 100%;
+    margin-top: 1rem;
+  
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px #ff9ff3;
+    }
+  }
+  
+  .welcome-message {
+    display: none;
+    font-size: 3rem;
+    color: #e84393;
+    text-align: center;
+    animation: rainbow 2s infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  
+    &[style*="display: block"] {
+      display: block;
+    }
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+    100% { transform: translateY(0) rotate(360deg); }
+  }
+  
+  @keyframes rainbow {
+    0% { color: #e84393; }
+    25% { color: #546de5; }
+    50% { color: #ffbe76; }
+    75% { color: #6decb9; }
+    100% { color: #e84393; }
+  }
+  
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(10px); }
+    50% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+  }

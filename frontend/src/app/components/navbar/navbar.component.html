@@ -1,0 +1,29 @@
+<mat-toolbar class="nav">
+    <a [routerLink]="'/'" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" class="left-nav">
+      <mat-icon>menu_book</mat-icon>
+    </a>
+    <a [routerLink]="'/'" class="left-nav"><span>TestSphere</span></a>
+    <span class="example-spacer"></span>
+    <a *ngIf="!isLoggedIn"
+     [routerLink]="'/signup'" class="register" >
+      Register
+      
+    </a>
+    <a *ngIf="!isLoggedIn"
+    [routerLink]="'/login'" class="register" >
+      Login
+    </a>
+    <a *ngIf="isLoggedIn && normalUser" (click)="navigateToUser()"
+    class="register" >
+      {{user.firstName}}
+    </a>
+    <a *ngIf="isLoggedIn && admin" routerLink="/admin"
+    class="register" >
+      {{user.firstName}}
+    </a>
+    <a *ngIf="isLoggedIn && normalUser" (click) = "logout()"
+    class="register" >
+      Logout
+    </a>
+  </mat-toolbar>
+  

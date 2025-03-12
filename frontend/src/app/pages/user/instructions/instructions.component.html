@@ -1,0 +1,49 @@
+<div class="bootstrap-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>
+                            Read the instructions of this page carefully..
+                        </mat-card-title>
+                        <mat-card-subtitle>
+                            One step more to go..
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <h1><b>{{quiz.title}}</b></h1>
+                        <p>{{quiz.description}}</p>
+                        <mat-divider></mat-divider>
+                        <h1>Important Instructions</h1>
+                        <ul class="custom-font">
+                            <li>The quizzes consists of <b>{{quiz.numberOfQuestions}} Questions.</b></li>
+                            <li></li>
+                            <li> Read each question carefully, and attempt within the time limit.</li>
+                            <li>You will be giving <b>{{quiz.numberOfQuestions * 2}} minutes</b> to complete the test.</li>
+                            <li>Maximum marks of the quiz are <b>{{quiz.maxMarks}}.</b></li>
+                            <li>Each question will carry <b>2 Marks</b>.</li>
+                            <li>You will be redirected to the Result page after the quiz submitted.</li>
+                            <li>You need to just check one option and your answer will be submitted.</li>
+                        </ul>
+                        <mat-divider></mat-divider>
+                        <h1>Attempting Quiz</h1>
+                        <ul class="custom-font">
+                            <li>The quiz consists of questions carefully designed to help you self-assess your comprehension of the information presented on the topics covered in the module. No data will be collected on the website regarding your responses or how many times you take the quiz.</li>
+                            <li>Each question in the quiz is of multiple-choice</li>
+                            <li> Read each question carefully, and attempt the quiz within the time limit.</li>
+                            <li>There is no negative marking for incorrect answers.</li>
+                            <li>Do not refresh or close the browser during the quiz.</li>
+                            <li>Once you submit the quiz, you cannot make any changes.</li>
+                            <li>The Quiz will be automatically submitted when the times up.</li>
+                            <li>Ensure a stable internet connection to avoid disruptions.</li>
+                        </ul>
+                    </mat-card-content>
+                    <mat-card-actions class="text-center">
+                        <button mat-raised-button (click)="startQuiz()" color="primary">Start Quiz</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

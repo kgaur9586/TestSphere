@@ -1,0 +1,27 @@
+.profile-image{
+    max-width: 250px;
+    max-height: 200px;
+    border: 2px solid #25c6ea;
+    border-radius: 50%;
+    
+}
+.text-center{
+    display: grid;
+    justify-content: center;
+}
+.profile-name{
+    margin-top: 20px;
+    margin-left: 30px;
+}
+.table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.table tr td{
+    padding: 10px 100px;
+    border: 1px solid #e2e2e2;
+    width: 100%;
+}
+input {
+    border-radius: 5rem;
+}

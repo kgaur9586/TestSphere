@@ -1,0 +1,102 @@
+<div class="bootstrap-wrapper" *ngIf="!isSubmit">
+    <div class="container-fluid">
+        <div class="col-md-2">
+            <mat-card>
+                <mat-card-header>
+                    <h1>Instructions</h1>
+                </mat-card-header>
+                <mat-card-content>
+                        
+                    <ul mat-list-item>
+                        <li><strong>❌ Do not refresh or close the browser during the quiz.</strong></li>
+                        <li><strong>🚫 Do not press the back button</strong> — <em>you will be logged out automatically.</em></li>
+                        <li><strong>📵 Do not use electronic devices during the quiz.</strong></li>
+                        <li><strong>🔄 Do not switch between tabs.</strong></li>
+                        <li><strong>📖 Read each question carefully</strong>, and <em>attempt the quiz within the time limit.</em></li>
+                        <li><strong>✅ There is no negative marking for incorrect answers.</strong></li>
+                        <li><strong>⚠️ Once you submit the quiz, you cannot make any changes.</strong></li>
+                        <li><strong>⏳ The quiz will be automatically submitted when the time is up.</strong></li>
+                        <li><strong>🌐 Ensure a stable internet connection</strong> to avoid disruptions.</li>
+                    </ul>
+                    
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-8">
+            <ng-container *ngIf="questions">
+                    <h1>On Going Quiz <b>{{questions[0].quiz.title}}</b></h1>
+                    <mat-card class="timer-card">
+                        <mat-card-content>
+                          <span class="time-label">Time Remaining : </span>
+                          <span class="time-value">{{ getMinutes(timer) }}</span><span class="time-unit">m</span> :
+                          <span class="time-value">{{ timer % 60 }}</span><span class="time-unit">s</span>
+                        </mat-card-content>
+                      </mat-card>
+                      
+                    <mat-progress-bar mode="indeterminate" class="mb20" value="(timer / (questions.length * 2 * 60))*100"></mat-progress-bar>
+            </ng-container>
+            <mat-card *ngFor="let q of questions;let i = index" class="mt10">
+                <mat-card-content>
+                    <b>Q.{{i + 1}}   </b> <span [innerHTML]="q.content"></span>
+                     <mat-divider class="mt10"></mat-divider>
+                     <div class="row mt10">
+                        <div class="col-md-6">
+                            <input type="radio" [value]="q.option1" [(ngModel)]="q.selectedAnswer" [name]="i.toString()"> {{q.option1}}
+                        </div>
+                        <div class="col-md-6">
+                            <input type="radio" [value]="q.option2" [(ngModel)]="q.selectedAnswer" [name]="i.toString()"> {{q.option2}}
+                        </div>
+                     </div>
+                     <div class="row mt10">
+                        <div class="col-md-6">
+                            <input type="radio" [value]="q.option3" [(ngModel)]="q.selectedAnswer" [name]="i.toString()"> {{q.option3}}
+                        </div>
+                        <div class="col-md-6">
+                            <input type="radio" [value]="q.option4" [(ngModel)]="q.selectedAnswer" [name]="i.toString()"> {{q.option4}}
+                        </div>
+                     </div>
+                </mat-card-content>
+            </mat-card>
+            <div class="container mt20 text-center">
+                <button mat-raised-button color="primary" (click)="submitQuiz()">Submit Quiz</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bootstrap-wrapper" *ngIf="isSubmit">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>
+                        <h1><b>Quiz Result</b></h1>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="mt20">
+                    <h2>Performance Summary</h2>
+                    <h1 *ngIf="(marksGot / totalMarks)*100 >= 90" class="text-success">Excellent! 🎉</h1>
+                    <h1 *ngIf="(marksGot / totalMarks)*100 >= 70 && (marksGot / totalMarks)*100 < 80" class="text-warning">Good Job! Keep Practicing! 💪</h1>
+                    <h1 *ngIf="(marksGot / totalMarks)*100 < 50" class="text-danger">Needs Improvement. Try Again! 📚</h1>
+                    <mat-divider></mat-divider>
+                    <h1>Marks-Got : {{marksGot}}</h1>
+                    <h1>Total Marks : {{totalMarks}}</h1>
+                    <mat-divider></mat-divider>
+                    <h1>Correct Answers : {{correctAnswers}}</h1>
+                    <h1>Questions Attempted : {{attempted}}</h1>
+                </mat-card-content>
+
+                  
+            
+                <div class="container mt20 text-center">
+                    <button mat-raised-button color="primary" (click)="tryAgain()">Try Again</button>
+                    <button mat-raised-button color="primary" class="ml20" (click)="printPage()">Print</button>
+                    <button mat-raised-button color="primary" class="ml20" [routerLink]="['/user/0']">Exit</button>
+                </div>
+
+            </mat-card>
+        </div>
+    </div>
+    
+
+</div>

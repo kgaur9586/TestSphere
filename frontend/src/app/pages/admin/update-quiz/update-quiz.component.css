@@ -1,0 +1,21 @@
+.w100{
+    width: 100%;
+}
+.ml10{
+    margin-left: 15px;
+}
+.example-margin {
+    margin: 10px;
+  }
+
+.ml10{
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.center{
+    display: grid;
+    justify-content: center;
+}
+.w50{
+    width: 47%;
+}

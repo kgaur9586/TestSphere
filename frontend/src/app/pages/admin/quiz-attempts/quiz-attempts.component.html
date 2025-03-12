@@ -1,0 +1,60 @@
+<!-- Main Container -->
+<div class="container-fluid mt-3">
+    <!-- Header -->
+    <div class="row">
+      <div class="col-12">
+        <mat-card class="header-card">
+          <mat-card-header>
+            <mat-card-title>
+              <h2 class="mb-0">Quiz Attempt Details ({{quizTitle}})</h2>
+            </mat-card-title>
+            <mat-card-subtitle>List of users who attempted the quiz</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </div>
+  
+    <!-- User List -->
+    <div class="row mt-3">
+      <div class="col-12">
+        <div *ngFor="let attempt of attempts" class="user-card">
+          <mat-card>
+            <mat-card-content>
+              <div class="container-fluid">
+                <div class="row">
+                  <!-- User Details -->
+                  <div class="col-md-8">
+                    <div class="user-info">
+                      <h3 class="mat-subtitle-1">
+                        <mat-icon>person</mat-icon>
+                        {{ attempt[0].firstName }} {{ attempt[0].lastName }}
+                      </h3>
+                      <div class="detail-item">
+                        <mat-icon>alternate_email</mat-icon>
+                        <span>{{ attempt[0].email }}</span>
+                      </div>
+                      <div class="detail-item">
+                        <mat-icon>person_pin</mat-icon>
+                        <span>{{ attempt[0].username }}</span>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <!-- Attempt Time -->
+                  <div class="col-md-4 time-section">
+                    <div class="time-display">
+                      <mat-icon>access_time</mat-icon>
+                      <div class="time-text">
+                        <span class="attempt-label">Attempted at:</span>
+                        <span class="timestamp">{{ attempt[1] | date:'medium' }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>

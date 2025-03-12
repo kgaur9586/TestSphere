@@ -1,0 +1,26 @@
+<mat-card>
+    <mat-list>
+        <div mat-subheader><h1>All Categories</h1></div>
+        <ng-container *ngFor="let c of categories; let last = last">
+            <mat-list-item>
+                <mat-icon matListItemIcon>category</mat-icon>
+                
+                <div matListItemTitle>{{ c.title }}</div>
+                
+                <div matListItemLine class="desc">{{ c.description }}</div>
+            
+                <button mat-raised-button class="ml10" (click)="deleteCategory(c.cid)">Delete</button>
+                <button mat-raised-button class="ml10" [routerLink]="'/admin/update-category/' + c.cid">Update</button>
+
+
+            </mat-list-item>
+        
+            <!-- Divider after each item, except the last one -->
+            <mat-divider *ngIf="!last"></mat-divider>
+        </ng-container>
+    </mat-list>
+
+    <mat-card-actions class="text-center">
+        <button mat-raised-button routerLink="/admin/add-categories">Add New Category</button>
+    </mat-card-actions>
+</mat-card>

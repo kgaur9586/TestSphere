@@ -1,0 +1,7 @@
+.w100{
+    width: 100%;
+}
+.text-center{
+    display: grid;
+    justify-content: center;
+}

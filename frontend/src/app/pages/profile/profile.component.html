@@ -1,0 +1,51 @@
+
+
+<mat-card *ngIf="user">
+    <h1>Your Profile Details</h1>
+    <mat-card-content>
+        <div class="bootstrap-wrapper">
+            <div class="container">
+                <div class="container text-center" >
+                    <img src="../../../assets/kapil.jpg" alt="" class="profile-image">
+                    <h1 class="profile-name">{{user.firstName}} {{user.lastName}}</h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 offset-md-1 col-12">
+                      
+                        <table class="table text-center">
+                                <tr>
+                                    <td>Username</td>
+                                    <td>{{user.username}}</td>
+                                </tr>
+                                <tr>
+                                    <td>UserId</td>
+                                    <td>{{user.id}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Phone</td>
+                                    <td>{{user.phone || 'N/A'}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>{{user.email || 'N/A'}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td>{{user.enabled?"Active":"Not Active"}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Role</td>
+                                    <td>{{ user?.authorities?.[0]?.authority || 'N/A' }}</td>
+                                </tr>
+                                
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+    <mat-card-actions class="text-center">
+        <button mat-raised-button  [routerLink]="['/admin/update', user.id]">Update</button>
+    </mat-card-actions>
+
+</mat-card>
