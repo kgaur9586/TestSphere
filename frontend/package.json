@@ -3,9 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node dist/frontend/server/main.js",
-    "prebuild": "npm install -g @angular/cli@latest && npm install",
-    "build": "npx ng build --configuration=production",
+    "start": "ng serve",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:frontend": "node dist/frontend/server/server.mjs"
