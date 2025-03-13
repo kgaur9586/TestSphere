@@ -42,10 +42,9 @@ public class WebSecurityConfig {
         http
         	.cors(cors -> cors.configurationSource(request -> {
             CorsConfiguration config = new CorsConfiguration();
-            config.setAllowedOrigins(List.of("http://localhost:4200", "https://testsphere-1.onrender.com"));
+            config.setAllowedOrigins(List.of("http://localhost:4200", "https://test-sphere.netlify.app"));
             config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-            config.setAllowedHeaders(List.of("*"));
-            config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+            config.setAllowedHeaders(List.of("*", "Authorization", "Content-Type"));
             config.setAllowCredentials(true);
             return config;
         }))
