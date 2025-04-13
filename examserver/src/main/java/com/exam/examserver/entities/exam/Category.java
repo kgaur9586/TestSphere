@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Category {
-		@Id()
+		@Id
 		@GeneratedValue(strategy=GenerationType.AUTO)
 		private long cid;
 		

@@ -38,7 +38,12 @@ export class UpdateProfileComponent implements OnInit{
                 this.userService.updateUser(user).subscribe((data)=>{
                   Swal.fire("Success!!","Profile Details Updated Successfully",'success');
                   this.loginService.setUser(this.user);
-                  this.router.navigate([`/admin/profile/`]);
+                  if(this.loginService.getUser().authorities[0].authority == "Admin"){
+                    this.router.navigate([`/admin/profile/`]);
+                  }
+                  else{
+                    this.router.navigate([`/user/user-profile`]);
+                  }
                 },(error:any)=>{
                   console.log(error);
                   Swal.fire("Error","Error while updating the details",'error');

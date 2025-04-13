@@ -1,5 +1,4 @@
-import { Component,  OnInit } from '@angular/core';
-import { MatIconButton } from '@angular/material/button';
+import { Component, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatToolbar } from '@angular/material/toolbar';
 import { Router, RouterModule } from '@angular/router';
@@ -9,45 +8,41 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MatToolbar,MatIconButton,MatIcon,RouterModule,CommonModule],
+  imports: [MatToolbar, MatIcon, RouterModule,CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent implements OnInit{
+export class NavbarComponent implements OnInit {
   isLoggedIn = false;
-  user:any = null;
-  admin:any = false;
-  normalUser:any = false;
-  constructor(public login:LoginService,private router: Router){
-    
-    
-  }
+  user: any = null;
+  admin: any = false;
+  normalUser: any = false;
+
+  constructor(public login: LoginService, private router: Router) {}
+
   ngOnInit(): void {
     this.isLoggedIn = this.login.isLoggedIn();
     this.user = this.login.getUser();
-  
-    if (this.user && this.user.authorities && this.user.authorities.length > 0) {
-      if (this.user.authorities[0].authority === "Normal") {
+
+    if (this.user?.authorities?.length > 0) {
+      if (this.user.authorities[0].authority === 'Normal') {
         this.normalUser = true;
       } else {
         this.admin = true;
       }
     }
-  
-    this.login.loginStatusSubject.asObservable().subscribe((data) => {
+
+    this.login.loginStatusSubject.asObservable().subscribe(() => {
       this.isLoggedIn = this.login.isLoggedIn();
-  
       this.user = this.login.getUser();
-  
-      if (this.user && this.user.authorities && this.user.authorities.length > 0) {
-        if (this.user.authorities[0].authority === "Normal") {
+
+      if (this.user?.authorities?.length > 0) {
+        if (this.user.authorities[0].authority === 'Normal') {
           this.normalUser = true;
-          this.admin = false; // Reset admin flag
-          this.login.loginStatusSubject.next(true);
+          this.admin = false;
         } else {
           this.admin = true;
-          this.normalUser = false; 
-          this.login.loginStatusSubject.next(true);
+          this.normalUser = false;
         }
       } else {
         this.admin = false;
@@ -55,14 +50,13 @@ export class NavbarComponent implements OnInit{
       }
     });
   }
-  
-  public logout(){
+
+  public logout() {
     this.login.logout();
-    // this.login.loginStatusSubject.next(false);
-      location.reload();
-  }
-  navigateToUser(){
-    this.router.navigate([`/user/${0}`]);
+    location.reload();
   }
 
+  navigateToUser() {
+    this.router.navigate([`/user/${0}`]);
+  }
 }

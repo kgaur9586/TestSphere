@@ -1,0 +1,94 @@
+.profile-image{
+    max-width: 250px;
+    max-height: 200px;
+    border: 2px solid #25c6ea;
+    border-radius: 50%;
+    width: 100%; /* Add for responsive scaling */
+    height: auto; /* Maintain aspect ratio */
+}
+.text-center{
+    display: grid;
+    justify-content: center;
+}
+.profile-name{
+    margin-top: 20px;
+    margin-left: 30px;
+}
+.table{
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: auto; /* Add horizontal scroll for small screens */
+    display: block; /* Needed for overflow */
+}
+.table tr td{
+    padding: 10px 100px;
+    border: 1px solid #e2e2e2;
+    width: 100%;
+}
+
+@media (max-width: 992px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .profile-image {
+        max-width: 180px;
+        max-height: 150px;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-name {
+        margin-left: 0;
+        text-align: center;
+    }
+    
+    .table tr td {
+        padding: 10px 30px;
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .table tr {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+        border: 1px solid #e2e2e2;
+    }
+    
+    .col-md-10.offset-md-1 {
+        margin-left: 0;
+        width: 100%;
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .profile-image {
+        max-width: 120px;
+        max-height: 100px;
+    }
+    
+    .table tr td {
+        padding: 10px 15px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    mat-card {
+        margin: 10px;
+        width: auto;
+    }
+}
+
+mat-card {
+    margin: 20px;
+    transition: margin 0.3s ease;
+}
+
+.bootstrap-wrapper {
+    overflow-x: hidden;
+}

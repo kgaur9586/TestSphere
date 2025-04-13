@@ -26,7 +26,12 @@ import { UpdateCategoryComponent } from './pages/admin/update-category/update-ca
 import { combineLatest } from 'rxjs';
 import { Component } from '@angular/core';
 import { QuizAttemptsComponent } from './pages/admin/quiz-attempts/quiz-attempts.component';
+import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
 export const routes: Routes = [
+    {
+        path:'user/start-quiz/:qid',component:StartQuizComponent,
+        canActivate:[NoramalGuard],
+    },
     {
         path:'signup',component:SignupComponent,pathMatch:"full",
         
@@ -85,6 +90,12 @@ export const routes: Routes = [
         path:'user',component:UserDashboardComponent,canActivate:[NoramalGuard],
         children:[
             {
+                path:'user-profile',component:UserProfileComponent
+            },
+            {
+                path:'update/:id',component:UpdateProfileComponent
+            },
+            {
                 path:':cId',
                 component:LoadQuizComponent
             },
@@ -92,12 +103,11 @@ export const routes: Routes = [
                 path:'instructions/:qid',
                 component:InstructionsComponent
             }
+            
         ]
-    },
-    {
-        path:'user/start-quiz/:qid',component:StartQuizComponent,
-        canActivate:[NoramalGuard],
     }
+    
+    
 
 
 ];
