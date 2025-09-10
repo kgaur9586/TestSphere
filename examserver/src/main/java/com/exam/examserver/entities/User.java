@@ -42,7 +42,7 @@ public class User implements UserDetails{
 	
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "user")
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "user")
 	@JsonIgnore // Prevent infinite recursion
 	private Set<UserRole> userRoles = new HashSet<>();
 	

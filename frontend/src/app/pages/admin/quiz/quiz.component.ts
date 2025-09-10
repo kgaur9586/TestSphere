@@ -26,33 +26,33 @@ export class QuizComponent implements OnInit{
   ngOnInit(): void {
     this.service.quizzes().subscribe((data:any) => {
         this.quizzes = data;
-        this.quizzes.forEach((q: { qid: any; }) => {
-          this.fetchNoOfQuestions(q.qid);
-        });
+        // this.quizzes.forEach((q: { qid: any; }) => {
+        //   this.fetchNoOfQuestions(q.qid);
+        // });
     },(error: any) => {
       console.log(error);
       Swal.fire("Error","Error while loading the quizzes",'error');
     })
   }
 
-  fetchNoOfQuestions(qid: any) {
-    if (this.questionCounts[qid] !== undefined) {
-      return; // If already fetched, do nothing
-    }
+  // fetchNoOfQuestions(qid: any) {
+  //   if (this.questionCounts[qid] !== undefined) {
+  //     return; // If already fetched, do nothing
+  //   }
 
-    this.questionService.getQuestionsOfQuiz(qid).subscribe(
-      (data: any) => {
-        if (Array.isArray(data)) {
-          this.questionCounts[qid] = data.length; // Store count
-        } else {
-          console.error("Expected array but got:", data);
-        }
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
-  }
+  //   this.questionService.getQuestionsOfQuiz(qid).subscribe(
+  //     (data: any) => {
+  //       if (Array.isArray(data)) {
+  //         this.questionCounts[qid] = data.length; // Store count
+  //       } else {
+  //         console.error("Expected array but got:", data);
+  //       }
+  //     },
+  //     (error: any) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
   
 
   public deleteQuiz(qid:any){
