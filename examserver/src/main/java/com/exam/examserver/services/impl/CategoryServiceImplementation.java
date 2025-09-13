@@ -1,6 +1,7 @@
 package com.exam.examserver.services.impl;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,9 @@ import com.exam.examserver.entities.exam.Category;
 import com.exam.examserver.repositories.CategoryRepository;
 import com.exam.examserver.services.CategoryService;
 
-
 @Service
 public class CategoryServiceImplementation implements CategoryService {
-	
+
 	@Autowired
 	private CategoryRepository categoryRepository;
 
@@ -29,21 +29,21 @@ public class CategoryServiceImplementation implements CategoryService {
 
 	@Override
 	public Set<Category> getCategories() {
-		return new LinkedHashSet<Category>(this.categoryRepository.findAll()) ;
+		return new LinkedHashSet<>(this.categoryRepository.findAll());
 	}
 
 	@Override
-	public Category getCategoryById(Long categoryId) {
-		return this.categoryRepository.findById(categoryId).get();
+	public Category getCategoryById(String categoryId) {
+		return this.categoryRepository.findById(categoryId)
+				.orElseThrow(() -> new RuntimeException("Category not found"));
 	}
 
 	@Override
-	public void deleteCategory(Long categoryId) {
-		Category category = new Category();
-		category.setCid(categoryId);
-		this.categoryRepository.delete(category);
-		return ;
-
+	public void deleteCategory(String categoryId) {
+		this.categoryRepository.deleteById(categoryId);
 	}
-
+	@Override
+	public List<Category> getAllCategories() {
+		return this.categoryRepository.findAll();
+	}
 }

@@ -1,23 +1,18 @@
 package com.exam.examserver.services.impl;
 
-import java.nio.file.attribute.UserPrincipalNotFoundException;
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.exam.examserver.entities.User;
 import com.exam.examserver.repositories.UserRepository;
 
 @Service
-@Transactional
 public class UserDetailServiceImpl implements UserDetailsService {
-    
+
     @Autowired
     private UserRepository userRepository;
 
@@ -27,16 +22,21 @@ public class UserDetailServiceImpl implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
-        
-        // Verify the password is BCrypt encoded
-        if (!user.getPassword().startsWith("$2a$")) {
+
+        // (Optional) Ensure password is encoded properly
+        if (!user.getPassword().startsWith("$2a$") && !user.getPassword().startsWith("$2b$")) {
             throw new BadCredentialsException("Password not properly encoded");
         }
+
+        // Convert your roles list into array
+        String[] rolesArray = user.getRoles() != null
+                ? user.getRoles().toArray(new String[0])
+                : new String[] { "Normal" };
 
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())
-                .roles(user.getUserRoles().stream().map(role -> role.getRole().getRoleName()).toArray(String[]::new))
+                .roles(rolesArray) // now using roles directly from User
                 .build();
     }
 }

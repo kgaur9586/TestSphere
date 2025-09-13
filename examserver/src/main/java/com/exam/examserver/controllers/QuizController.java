@@ -2,71 +2,68 @@ package com.exam.examserver.controllers;
 
 import java.util.Set;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.exam.examserver.entities.exam.Category;
 import com.exam.examserver.entities.exam.Quiz;
+import com.exam.examserver.responseDto.QuizResponse;
 import com.exam.examserver.services.QuizService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/quiz")
 @CrossOrigin("*")
 public class QuizController {
+
 	@Autowired
 	private QuizService quizService;
-	
+
 	@PostMapping("/")
-	public ResponseEntity<Quiz> addQuiz(@RequestBody Quiz quiz){
+	public ResponseEntity<Quiz> addQuiz(@RequestBody Quiz quiz) {
 		return ResponseEntity.ok(this.quizService.addQuiz(quiz));
 	}
-	
+
 	@PutMapping("/update")
-	public ResponseEntity<Quiz> update(@RequestBody Quiz quiz){
+	public ResponseEntity<Quiz> update(@RequestBody Quiz quiz) {
 		return ResponseEntity.ok(this.quizService.updateQuiz(quiz));
 	}
-	
+
 	@GetMapping("/")
-	public ResponseEntity<Set<Quiz>> getQuizzes(){
+	public ResponseEntity<Set<Quiz>> getQuizzes() {
 		return ResponseEntity.ok(this.quizService.getAllQuizzes());
 	}
-	
+
 	@GetMapping("/{quizId}")
-	public ResponseEntity<Quiz> getQuiz(@PathVariable("quizId") Long quizId){
+	public ResponseEntity<Quiz> getQuiz(@PathVariable("quizId") String quizId) {
 		return ResponseEntity.ok(this.quizService.getQuiz(quizId));
 	}
+	@GetMapping("/withCategories/{quizId}")
+	public ResponseEntity<QuizResponse> getQuizWithCategories(@PathVariable("quizId") String quizId) {
+		return ResponseEntity.ok(this.quizService.getQuizWithCategory(quizId));
+	}
+	
+
 	@DeleteMapping("/{quizId}")
-	public void deleteQuiz(@PathVariable("quizId") Long quizId) {
+	public void deleteQuiz(@PathVariable("quizId") String quizId) {
 		this.quizService.deleteQuiz(quizId);
 	}
+
 	@GetMapping("/category/{cId}")
-	public ResponseEntity<?> getQuizzesOfCategory(@PathVariable("cId") Long cId){
-		Category category = new Category();
-		category.setCid(cId);
-		return ResponseEntity.ok(this.quizService.getQuizzesOfCategory(category));
+	public ResponseEntity<?> getQuizzesOfCategory(@PathVariable("cId") String cId) {
+		return ResponseEntity.ok(this.quizService.getQuizzesOfCategory(cId));
 	}
-	
+
 	@GetMapping("/active")
-	public ResponseEntity<?> getActiveQuizzes(){
+	public ResponseEntity<?> getActiveQuizzes() {
 		return ResponseEntity.ok(this.quizService.getActiveQuizzes());
 	}
-	
+
 	@GetMapping("/category/active/{cId}")
-	public ResponseEntity<?> getActiveQuizzesOfCategory(@PathVariable("cId") Long cId){
-		Category c = new Category();
-		c.setCid(cId);
-		return ResponseEntity.ok(this.quizService.getActiveQuizzesOfCategory(c));
+	public ResponseEntity<?> getActiveQuizzesOfCategory(@PathVariable("cId") String cId) {
+		return ResponseEntity.ok(this.quizService.getActiveQuizzesOfCategory(cId));
 	}
-	
-	
-	
 }

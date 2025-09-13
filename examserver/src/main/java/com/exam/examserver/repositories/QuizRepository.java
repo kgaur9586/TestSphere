@@ -2,17 +2,15 @@ package com.exam.examserver.repositories;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.exam.examserver.entities.exam.Category;
 import com.exam.examserver.entities.exam.Quiz;
 
-public interface QuizRepository extends JpaRepository<Quiz, Long> {
-	
-	public List<Quiz> findBycategory(Category category);
-	
-	public List<Quiz> findByactive(Boolean b);
-	
-	public List<Quiz> findByCategoryAndActive(Category c, Boolean b);
+public interface QuizRepository extends MongoRepository<Quiz, String> {
 
+	List<Quiz> findByCategoryId(String categoryId);
+
+	List<Quiz> findByActive(Boolean active);
+
+	List<Quiz> findByCategoryIdAndActive(String categoryId, Boolean active);
 }

@@ -7,13 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.exam.examserver.entities.exam.Question;
-import com.exam.examserver.entities.exam.Quiz;
 import com.exam.examserver.repositories.QuestionRepository;
 import com.exam.examserver.services.QuestionService;
 
 @Service
 public class QuestionServiceImplementation implements QuestionService {
-	
+
 	@Autowired
 	private QuestionRepository questionRepository;
 
@@ -29,29 +28,26 @@ public class QuestionServiceImplementation implements QuestionService {
 
 	@Override
 	public Set<Question> getQuestions() {
-		return new HashSet<Question>(this.questionRepository.findAll());
+		return new HashSet<>(this.questionRepository.findAll());
 	}
 
 	@Override
-	public Question getQuestion(Long questionId) {
-		return this.questionRepository.findById(questionId).get();
+	public Question getQuestion(String questionId) {
+		return this.questionRepository.findById(questionId).orElse(null);
 	}
 
 	@Override
-	public Set<Question> getQuestionOfQuiz(Quiz quiz) {
-		return this.questionRepository.findByQuiz(quiz);
+	public Set<Question> getQuestionOfQuiz(String quizId) {
+		return this.questionRepository.findByQuizId(quizId);
 	}
 
 	@Override
-	public void deleteQuestionById(Long questionId) {
+	public void deleteQuestionById(String questionId) {
 		this.questionRepository.deleteById(questionId);
-
 	}
 
 	@Override
-	public Question get(Long questionId) {
-		// TODO Auto-generated method stub
-		return this.questionRepository.getOne(questionId);
+	public Question get(String questionId) {
+		return this.questionRepository.findById(questionId).orElse(null);
 	}
-
 }

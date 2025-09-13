@@ -1,16 +1,17 @@
 package com.exam.examserver.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * DTO returned after successful authentication containing the JWT token.
+ */
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class JwtResponse {
-	String token;
-	public JwtResponse(String token2) {
-		// TODO Auto-generated constructor stub
-		this.token = token2;
-	}
 
-	
+	private String token;
+
 }

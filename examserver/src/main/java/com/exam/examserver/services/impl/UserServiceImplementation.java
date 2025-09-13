@@ -1,17 +1,12 @@
 package com.exam.examserver.services.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.exam.examserver.entities.User;
-import com.exam.examserver.entities.UserRole;
-import com.exam.examserver.repositories.RoleRepository;
 import com.exam.examserver.repositories.UserRepository;
 import com.exam.examserver.services.UserService;
 
@@ -20,41 +15,34 @@ public class UserServiceImplementation implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-    
+
     @Autowired
-    private RoleRepository roleRepository;
-    
-    @Autowired
-    private PasswordEncoder passwordEncoder; // Add password encoder
+    private PasswordEncoder passwordEncoder;
 
     @Override
-    public User createUser(User user, Set<UserRole> userRoles) throws Exception {
-        User local = userRepository.findByUsername(user.getUsername());
-        User email_user = userRepository.findByEmail(user.getEmail());
-        
-        if(local != null || email_user != null) {
+    public User createUser(User user) throws Exception {
+        // Check for duplicate username or email
+        User existingByUsername = userRepository.findByUsername(user.getUsername());
+        User existingByEmail = userRepository.findByEmail(user.getEmail());
+
+        if (existingByUsername != null || existingByEmail != null) {
             throw new Exception("User already exists!");
         }
-        
+
         // Encode password before saving
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        
-        for(UserRole ur : userRoles) {
-            roleRepository.save(ur.getRole());
-        }
-        user.setUserRoles(userRoles);
+
+        // Save user to MongoDB
         return userRepository.save(user);
     }
 
-    // Keep other methods unchanged
     @Override
-    @Transactional
     public User getUser(String username) {
         return this.userRepository.findByUsername(username);
     }
 
     @Override
-    public void deleteUser(Long userId) {
+    public void deleteUser(String userId) {
         this.userRepository.deleteById(userId);
     }
 
@@ -64,27 +52,28 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    @Transactional
     public User updateUser(User user) {
+        // Fetch the existing user by username or id
         User existingUser = userRepository.findByUsername(user.getUsername());
-        
         if (existingUser == null) {
             throw new RuntimeException("User not found with username: " + user.getUsername());
         }
-        
-        // Preserve unchanged fields (e.g., password)
+
+        // Preserve password if not updated
         if (user.getPassword() == null || user.getPassword().isEmpty()) {
-            user.setPassword(existingUser.getPassword()); // Keep old password
+            user.setPassword(existingUser.getPassword());
         } else if (!user.getPassword().equals(existingUser.getPassword())) {
-            user.setPassword(passwordEncoder.encode(user.getPassword())); // Encode new password
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
-        
+
         // Preserve roles if not provided
-        if (user.getUserRoles() == null || user.getUserRoles().isEmpty()) {
-            user.setUserRoles(existingUser.getUserRoles());
+        if (user.getRoles() == null || user.getRoles().isEmpty()) {
+            user.setRoles(existingUser.getRoles());
         }
+
+        // Keep MongoDB _id so update works properly
+        user.setId(existingUser.getId());
 
         return userRepository.save(user);
     }
-
 }

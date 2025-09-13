@@ -5,8 +5,9 @@ import java.util.List;
 import com.exam.examserver.entities.exam.QuizAttempt;
 
 public interface QuizAttemptService {
-	public void recordAttempt(Long quizId, Long userId);
-	public Long getAttemptCount(Long quizId);
-	public List<Object[]> getAllAttemptsOfQuiz(Long quizId);
-	
+	void recordAttempt(String quizId, String userId);
+
+	Long getAttemptCount(String quizId);
+
+	List<QuizAttempt> getAllAttemptsOfQuiz(String quizId);
 }
