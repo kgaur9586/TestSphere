@@ -22,22 +22,22 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './add-question.component.html',
-  styleUrl: './add-question.component.css'
+  styleUrl: './add-question.component.css',
 })
 export class AddQuestionComponent implements OnInit {
   qId: any;
   q_title: any;
   question: any = {
-    quiz: {},
+    quizId: '',
     content: '',
     option1: '',
     option2: '',
     option3: '',
     option4: '',
-    answer: ''
+    answer: '',
   };
 
   constructor(
@@ -50,7 +50,7 @@ export class AddQuestionComponent implements OnInit {
 
   ngOnInit(): void {
     this.qId = this.route.snapshot.params['qid'];
-    this.question.quiz['qid'] = this.qId;
+    this.question.quizId = this.qId;
     this.q_title = this.route.snapshot.params['title'];
 
     console.log(this.q_title);
@@ -60,14 +60,16 @@ export class AddQuestionComponent implements OnInit {
     if (question.answer.trim() === '' || question.answer == null) {
       this.snack.open('Please Select answer!!', '', {
         duration: 3000,
-        verticalPosition: 'top'
+        verticalPosition: 'top',
       });
       return;
     }
     this.questionService.addQuestionTOQuiz(question).subscribe(
       (data) => {
         Swal.fire('Successful', 'Question is added successfully !', 'success');
-        this.router.navigate([`admin/view-questions/${this.qId}/${this.q_title}`]);
+        this.router.navigate([
+          `admin/view-questions/${this.qId}/${this.q_title}`,
+        ]);
       },
       (error: any) => {
         Swal.fire('Error!', 'Some error occurred, try again!', 'error');

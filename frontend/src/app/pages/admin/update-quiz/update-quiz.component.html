@@ -54,9 +54,9 @@
 
                         <mat-form-field class="w100">
                             <mat-label>Select Category</mat-label>
-                            <mat-select [(ngModel)]="quiz.category" name="category">
-                                <mat-option *ngFor="let c of categories" [value]="c">
-                                    {{ c.title }}
+                            <mat-select [(ngModel)]="quiz.categoryId" name="categoryId">
+                                <mat-option *ngFor="let category of quiz.categories" [value]="category.id">
+                                    {{ category.title }}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>

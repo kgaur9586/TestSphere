@@ -5,19 +5,22 @@ import baseUrl from './helper';
 import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
   public loginStatusSubject = new Subject<boolean>();
-  constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   // Check if running in the browser
   private isBrowser(): boolean {
     return isPlatformBrowser(this.platformId);
   }
-
-  public getCurrentUser() {
-    return this.http.get(`${baseUrl}/current-user`);
+  // send username in params
+  public getCurrentUser(username: any) {
+    return this.http.get(`${baseUrl}/user/${username}`);
   }
 
   public generateToken(loginData: any) {
@@ -26,14 +29,14 @@ export class LoginService {
 
   public loginUser(token: any) {
     if (this.isBrowser()) {
-      localStorage.setItem("token", token);
+      localStorage.setItem('token', token);
     }
     return true;
   }
 
   public isLoggedIn() {
     if (this.isBrowser()) {
-      let tokenStr = localStorage.getItem("token");
+      let tokenStr = localStorage.getItem('token');
       return tokenStr !== undefined && tokenStr !== '' && tokenStr !== null;
     }
     return false;
@@ -41,14 +44,14 @@ export class LoginService {
 
   public logout() {
     if (this.isBrowser()) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
     }
     return true;
   }
 
   public getToken() {
-    return this.isBrowser() ? localStorage.getItem("token") : null;
+    return this.isBrowser() ? localStorage.getItem('token') : null;
   }
 
   public setUser(user: any) {
@@ -59,7 +62,7 @@ export class LoginService {
 
   public getUser() {
     if (this.isBrowser()) {
-      let userStr = localStorage.getItem("user");
+      let userStr = localStorage.getItem('user');
       return userStr ? JSON.parse(userStr) : null;
     }
     return null;
@@ -67,7 +70,6 @@ export class LoginService {
 
   public getUserRole() {
     let user = this.getUser();
-    return user ? user.authorities[0].authority : null;
+    return user ? user.roles[0] : null;
   }
-  
 }

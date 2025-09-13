@@ -76,7 +76,7 @@ import { Router } from '@angular/router';
           console.log(data);
           //login...
           this.login.loginUser(data.token);
-          this.login.getCurrentUser().subscribe(
+          this.login.getCurrentUser(this.user.username).subscribe(
             (user:any) => {
               this.login.setUser(user);
               console.log(user);

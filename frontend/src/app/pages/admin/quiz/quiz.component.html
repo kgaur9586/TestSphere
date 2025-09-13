@@ -4,21 +4,21 @@
     <mat-card-header>
         <mat-card-title>{{q.title}}</mat-card-title>
         <mat-card-subtitle>
-            {{q.category.title}}
+            {{q?.category?.title}}
         </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         {{q.description}}
     </mat-card-content>
     <div class="container text-center">
-        <button mat-raised-button class="ml10" [routerLink]="'/admin/view-questions/' + q.qid + '/' + q.title">Questions</button>
-        <button mat-raised-button class="ml10" [routerLink]="'/admin/update-quiz/' + q.qid">Update</button>
-        <button mat-raised-button class="ml10" [routerLink]="'/admin/quiz-attempt/' + q.qid">Attempts</button>
+        <button mat-raised-button class="ml10" [routerLink]="'/admin/view-questions/' + q.id + '/' + q.title">Questions</button>
+        <button mat-raised-button class="ml10" [routerLink]="'/admin/update-quiz/' + q.id">Update</button>
+        <button mat-raised-button class="ml10" [routerLink]="'/admin/quiz-attempt/' + q.id">Attempts</button>
         <button mat-raised-button class="ml10" (click)="deleteQuiz(q.qid)">Delete</button>
         <mat-card-subtitle class="right">Max-Marks: {{q.maxMarks}}</mat-card-subtitle>
             <div class="row">
             <div class="col-12">
-                <mat-card-subtitle class="right ps-0">Current Questions: {{questionCounts[q.qid] || '0'}}</mat-card-subtitle>
+                <mat-card-subtitle class="right ps-0">Current Questions: {{questionCounts[q.id] || '0'}}</mat-card-subtitle>
             </div>
             <div class="col-12">
                 <mat-card-subtitle class="right ps-0">Required Questions: {{q.numberOfQuestions}}</mat-card-subtitle>

@@ -29,20 +29,20 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     CommonModule,
     MatInputModule,
     MatButtonModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
   ],
   templateUrl: './add-quiz.component.html',
-  styleUrl: './add-quiz.component.css'
+  styleUrl: './add-quiz.component.css',
 })
 export class AddQuizComponent implements OnInit {
-  categories: any = null;
+  categories: any[] = []; // list of categories from API
   quizData = {
     title: '',
     description: '',
     maxMarks: '',
     numberOfQuestions: '',
     active: true,
-    category: null
+    categoryId: '', // match backend field
   };
 
   constructor(
@@ -59,7 +59,7 @@ export class AddQuizComponent implements OnInit {
         console.log(this.categories);
       },
       (error: any) => {
-        console.log(error);
+        console.error(error);
         Swal.fire('Error', 'Error while loading the categories', 'error');
       }
     );
@@ -69,17 +69,28 @@ export class AddQuizComponent implements OnInit {
     if (this.quizData.title.trim() === '' || this.quizData.title == null) {
       this.snack.open('Title is required !!', '', {
         duration: 3000,
-        verticalPosition: 'top'
+        verticalPosition: 'top',
       });
       return;
     }
+
+    // Ensure categoryId is selected before submitting
+    if (!this.quizData.categoryId) {
+      this.snack.open('Please select a category !!', '', {
+        duration: 3000,
+        verticalPosition: 'top',
+      });
+      return;
+    }
+
     this.quizService.addQuiz(this.quizData).subscribe(
       (data) => {
         Swal.fire('Success!!', 'Quiz is added successfully', 'success');
         this.router.navigate(['admin/quiz']);
       },
       (error: any) => {
-        console.log(error);
+        console.error(error);
+        Swal.fire('Error', 'Something went wrong', 'error');
       }
     );
   }
