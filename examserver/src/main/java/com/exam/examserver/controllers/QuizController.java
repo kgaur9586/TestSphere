@@ -1,5 +1,6 @@
 package com.exam.examserver.controllers;
 
+import java.util.List;
 import java.util.Set;
 
 import org.apache.catalina.connector.Response;
@@ -8,10 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.exam.examserver.entities.exam.Quiz;
+import com.exam.examserver.responseDto.ActiveQuizResponse;
 import com.exam.examserver.responseDto.QuizResponse;
 import com.exam.examserver.services.QuizService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -58,12 +58,12 @@ public class QuizController {
 	}
 
 	@GetMapping("/active")
-	public ResponseEntity<?> getActiveQuizzes() {
+	public ResponseEntity<List<ActiveQuizResponse>> getActiveQuizzes() {
 		return ResponseEntity.ok(this.quizService.getActiveQuizzes());
 	}
 
 	@GetMapping("/category/active/{cId}")
-	public ResponseEntity<?> getActiveQuizzesOfCategory(@PathVariable("cId") String cId) {
+	public ResponseEntity<List<ActiveQuizResponse>> getActiveQuizzesOfCategory(@PathVariable("cId") String cId) {
 		return ResponseEntity.ok(this.quizService.getActiveQuizzesOfCategory(cId));
 	}
 }

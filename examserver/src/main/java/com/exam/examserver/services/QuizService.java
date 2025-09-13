@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.exam.examserver.entities.exam.Quiz;
+import com.exam.examserver.responseDto.ActiveQuizResponse;
 import com.exam.examserver.responseDto.QuizResponse;
 
 public interface QuizService {
@@ -20,8 +21,8 @@ public interface QuizService {
 
 	List<Quiz> getQuizzesOfCategory(String categoryId);
 
-	List<Quiz> getActiveQuizzes();
+	List<ActiveQuizResponse> getActiveQuizzes();
 
-	List<Quiz> getActiveQuizzesOfCategory(String categoryId);
+	List<ActiveQuizResponse> getActiveQuizzesOfCategory(String categoryId);
 	QuizResponse getQuizWithCategory(String quizId);
 }

@@ -69,28 +69,52 @@ public class QuestionController {
 	// evaluating quiz
 	@PostMapping("/eval/quiz")
 	public ResponseEntity<?> evalQuiz(@RequestBody List<Question> questions) {
-		double marksGot = 0;
-		int correctAnswers = 0;
-		int attempted = 0;
-		double marksSingle;
+		try {
+			double marksGot = 0;
+			int correctAnswers = 0;
+			int attempted = 0;
 
-		for (Question q : questions) {
-			Question question = this.questionService.get(q.getId());
-			if (question != null && question.getAnswer().equals(q.getSelectedAnswer())) {
-				// correct answer
-				correctAnswers++;
-				marksSingle = Double.parseDouble(q.getSelectedAnswer()) / questions.size();
-				marksGot += marksSingle;
+			if (questions.isEmpty()) {
+				return ResponseEntity.badRequest().body("No questions submitted.");
 			}
-			if (q.getSelectedAnswer() != null && !q.getSelectedAnswer().isEmpty()) {
-				attempted++;
+
+			// Get quiz to fetch maxMarks and numberOfQuestions
+			Question firstQuestion = this.questionService.get(questions.get(0).getId());
+			if (firstQuestion == null) {
+				return ResponseEntity.badRequest().body("Invalid question data.");
 			}
+			Quiz quiz = this.quizService.getQuiz(firstQuestion.getQuizId());
+			double marksPerQuestion = 1.0;
+			if (quiz != null) {
+				try {
+					marksPerQuestion = Double.parseDouble(quiz.getMaxMarks())
+							/ Double.parseDouble(quiz.getNumberOfQuestions());
+				} catch (Exception e) {
+					marksPerQuestion = 1.0;
+				}
+			}
+
+			for (Question q : questions) {
+				Question question = this.questionService.get(q.getId());
+				if (question != null && question.getAnswer().trim()
+						.equals(q.getSelectedAnswer() != null ? q.getSelectedAnswer().trim() : "")) {
+					correctAnswers++;
+					marksGot += marksPerQuestion;
+				}
+				if (q.getSelectedAnswer() != null && !q.getSelectedAnswer().isEmpty()) {
+					attempted++;
+				}
+			}
+
+			Map<String, Object> answersMap = Map.of(
+					"marksGot", marksGot,
+					"correctAnswers", correctAnswers,
+					"attempted", attempted);
+			return ResponseEntity.ok(answersMap);
+		} catch (Exception e) {
+			System.out.println("Error while evaluating quiz" + e);
+			e.printStackTrace();
+			return ResponseEntity.status(500).body("Error while evaluating quiz" + e.getMessage());
 		}
-
-		Map<String, Object> answersMap = Map.of(
-				"marksGot", marksGot,
-				"correctAnswers", correctAnswers,
-				"attempted", attempted);
-		return ResponseEntity.ok(answersMap);
 	}
 }

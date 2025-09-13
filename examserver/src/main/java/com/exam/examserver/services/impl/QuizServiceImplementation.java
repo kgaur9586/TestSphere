@@ -11,6 +11,7 @@ import com.exam.examserver.entities.exam.Category;
 import com.exam.examserver.entities.exam.Quiz;
 import com.exam.examserver.repositories.CategoryRepository;
 import com.exam.examserver.repositories.QuizRepository;
+import com.exam.examserver.responseDto.ActiveQuizResponse;
 import com.exam.examserver.responseDto.QuizResponse;
 import com.exam.examserver.services.CategoryService;
 import com.exam.examserver.services.QuizService;
@@ -45,6 +46,7 @@ public class QuizServiceImplementation implements QuizService {
         Quiz quiz = quizRepository.findById(quizId).orElse(null);
         return quiz;
     }
+
     @Override
     public QuizResponse getQuizWithCategory(String quizId) {
         Quiz quiz = quizRepository.findById(quizId).orElse(null);
@@ -66,12 +68,22 @@ public class QuizServiceImplementation implements QuizService {
     }
 
     @Override
-    public List<Quiz> getActiveQuizzes() {
-        return this.quizRepository.findByActive(true);
+    public List<ActiveQuizResponse> getActiveQuizzes() {
+        List<Quiz> activeQuizzes = this.quizRepository.findByActive(true);
+
+        return activeQuizzes.stream()
+                .map(quiz -> new ActiveQuizResponse(quiz,
+                        this.categoryRepository.findById(quiz.getCategoryId()).orElse(null)))
+                .toList();
+
     }
 
     @Override
-    public List<Quiz> getActiveQuizzesOfCategory(String categoryId) {
-        return this.quizRepository.findByCategoryIdAndActive(categoryId, true);
+    public List<ActiveQuizResponse> getActiveQuizzesOfCategory(String categoryId) {
+        List<Quiz> activeQuizzes = this.quizRepository.findByCategoryIdAndActive(categoryId, true);
+        return activeQuizzes.stream()
+                .map(quiz -> new ActiveQuizResponse(quiz,
+                        this.categoryRepository.findById(quiz.getCategoryId()).orElse(null)))
+                .toList();
     }
 }
