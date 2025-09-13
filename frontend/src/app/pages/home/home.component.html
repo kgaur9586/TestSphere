@@ -19,8 +19,8 @@
                     <p class="truncate">{{ q.description }}</p>
                 </mat-card-content>
                 <mat-card-actions class="button-container">
-                    <button mat-raised-button [routerLink]="['/user/instructions', q.qid]">View</button>
-                    <button mat-raised-button class="ml10" [routerLink]="['/user/instructions', q.qid]">Start</button>
+                    <button mat-raised-button [routerLink]="['/user/instructions', q.id]">View</button>
+                    <button mat-raised-button class="ml10" [routerLink]="['/user/instructions', q.id]">Start</button>
                 </mat-card-actions>
                 <mat-card-actions class="button-container">
                     <button mat-button>Questions: {{ q.numberOfQuestions }}</button>
@@ -41,7 +41,7 @@
 
 <div class="main-category-container">
     <ng-container *ngFor="let c of category">
-        <div class="category-block" *ngIf="(categoryQuizzes?.[c.cid] || []).length > 0">
+        <div class="category-block" *ngIf="(categoryQuizzes?.[c.id] || []).length > 0">
             <!-- Category Title -->
             <div class="category-header">
                 <mat-icon class="icon-spacing">arrow_right</mat-icon>
@@ -50,7 +50,7 @@
 
             <!-- Responsive Quiz Grid -->
             <div class="quiz-grid">
-                <div *ngFor="let que of categoryQuizzes[c.cid] || []" class="quiz-card">
+                <div *ngFor="let que of categoryQuizzes[c.id] || []" class="quiz-card">
                     <mat-card>
                         <mat-card-header>
                             <div mat-card-avatar class="example-header-image"></div>
@@ -61,8 +61,8 @@
                             <p class="truncate">{{ que.description }}</p>
                         </mat-card-content>
                         <mat-card-actions class="button-container">
-                            <button mat-raised-button [routerLink]="['/user/instructions', que.qid]">View</button>
-                            <button mat-raised-button class="ml10" [routerLink]="['/user/instructions', que.qid]">
+                            <button mat-raised-button [routerLink]="['/user/instructions', que.id]">View</button>
+                            <button mat-raised-button class="ml10" [routerLink]="['/user/instructions', que.id]">
                                 Start
                             </button>
                         </mat-card-actions>

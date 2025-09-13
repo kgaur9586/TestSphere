@@ -24,7 +24,7 @@
         </div>
         <div class="col-md-8">
             <ng-container *ngIf="questions">
-                    <h1>On Going Quiz <b>{{questions[0].quiz.title}}</b></h1>
+                    <h1>On Going Quiz <b>{{questions[0]?.quiz?.title}}</b></h1>
                     <mat-card class="timer-card">
                         <mat-card-content>
                           <span class="time-label">Time Remaining : </span>
