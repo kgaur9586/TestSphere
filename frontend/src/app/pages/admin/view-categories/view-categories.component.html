@@ -9,8 +9,8 @@
                 
                 <div matListItemLine class="desc">{{ c.description }}</div>
             
-                <button mat-raised-button class="ml10" (click)="deleteCategory(c.cid)">Delete</button>
-                <button mat-raised-button class="ml10" [routerLink]="'/admin/update-category/' + c.cid">Update</button>
+                <button mat-raised-button class="ml10" (click)="deleteCategory(c.id)">Delete</button>
+                <button mat-raised-button class="ml10" [routerLink]="'/admin/update-category/' + c.id">Update</button>
 
 
             </mat-list-item>
