@@ -15,8 +15,10 @@ import java.util.List;
 @RequestMapping("/api/quizzes")
 public class QuizAttemptController {
 
+
 	@Autowired
 	private QuizAttemptService quizAttemptService;
+
 
 	@GetMapping("/{quizId}/attempt/{userId}")
 	public ResponseEntity<?> attemptQuiz(@PathVariable("quizId") String quizId,
@@ -25,10 +27,12 @@ public class QuizAttemptController {
 		return ResponseEntity.ok(HttpStatus.OK);
 	}
 
+
 	@GetMapping("/{quizId}/attempt-count")
 	public ResponseEntity<Long> getAttemptCount(@PathVariable("quizId") String quizId) {
 		return ResponseEntity.ok(this.quizAttemptService.getAttemptCount(quizId));
 	}
+
 
 	@GetMapping("/{quizId}/attempted-by")
 	public ResponseEntity<List<QuizAttemptResponse>> getAttemptsByQuizId(@PathVariable("quizId") String quizId) {

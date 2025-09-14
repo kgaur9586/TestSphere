@@ -2,7 +2,6 @@ package com.exam.examserver.services;
 
 import java.util.List;
 
-import com.exam.examserver.entities.exam.QuizAttempt;
 import com.exam.examserver.responseDto.QuizAttemptResponse;
 
 public interface QuizAttemptService {
