@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.exam.examserver.entities.exam.Question;
 import com.exam.examserver.entities.exam.Quiz;
+import com.exam.examserver.responseDto.QuestionResponse;
 import com.exam.examserver.services.QuestionService;
 import com.exam.examserver.services.QuizService;
 
@@ -42,7 +43,9 @@ public class QuestionController {
 		list.forEach((q) -> q.setAnswer("")); // hide answer
 
 		java.util.Collections.shuffle(list);
-		return ResponseEntity.ok(list);
+
+		QuestionResponse response = new QuestionResponse(quiz, list);
+		return ResponseEntity.ok(response);
 	}
 
 	@GetMapping("/quiz/all/{quizId}")
