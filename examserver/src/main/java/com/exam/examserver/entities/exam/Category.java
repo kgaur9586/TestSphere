@@ -3,34 +3,32 @@ package com.exam.examserver.entities.exam;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name="category")
+/**
+ * Category document stored in MongoDB.
+ */
+@Document(collection = "categories") // <— MongoDB collection name
 @NoArgsConstructor
 @Data
 public class Category {
-		@Id
-		@GeneratedValue(strategy=GenerationType.AUTO)
-		private long cid;
-		
-		private String title;
-		private String description;
-		
-		@OneToMany(mappedBy = "category",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-		@JsonIgnore
-		private Set<Quiz> quizzes = new LinkedHashSet<>();
-		
-		
+
+	@Id
+	private String id; // <— MongoDB uses String as id by default
+
+	private String title;
+	private String description;
+
+	/**
+	 * For now we’ll store quiz IDs instead of JPA relationship.
+	 * Later we can replace with @DBRef or embed quizzes.
+	 */
+	@JsonIgnore
+	private Set<String> quizIds = new LinkedHashSet<>();
 }

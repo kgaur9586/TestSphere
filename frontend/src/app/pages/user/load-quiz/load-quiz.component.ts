@@ -25,7 +25,7 @@ export class LoadQuizComponent implements OnInit{
       if(this.catId == 0){
         this.quizService.getActiveQuizzes().subscribe((data:any) => {
           this.quizzes = data;
-          console.log(this.quizzes);
+          console.log("quizzes  = ", this.quizzes);
         },(error:any)=> {
           console.log(error);
           alert("error in loading quizzes!");
@@ -35,7 +35,7 @@ export class LoadQuizComponent implements OnInit{
         console.log("load specific quiz..");
         this.quizService.getActiveQuizzesOfCategory(this.catId).subscribe((data)=>{
           this.quizzes = data;
-          console.log(this.quizzes);
+          console.log("active quiz of category ", this.quizzes);
         },(error:any)=>{
           console.log(error);
           alert("error in loading data..");

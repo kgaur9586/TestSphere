@@ -9,7 +9,7 @@
           <mat-icon>folder</mat-icon>
           <span class="menu-text">All Quizzes</span>
         </a>
-        <a mat-list-item [routerLink]="['/user', c.cid]" *ngFor="let c of categories">
+        <a mat-list-item [routerLink]="['/user', c.id]" *ngFor="let c of categories">
           <mat-icon>quiz</mat-icon>
           <span class="menu-text">{{c.title}}</span>
         </a>

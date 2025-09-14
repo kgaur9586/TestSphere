@@ -3,23 +3,26 @@ package com.exam.examserver.services;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.stereotype.Service;
-
-import com.exam.examserver.entities.exam.Category;
 import com.exam.examserver.entities.exam.Quiz;
+import com.exam.examserver.responseDto.ActiveQuizResponse;
+import com.exam.examserver.responseDto.QuizResponse;
 
+public interface QuizService {
 
-public interface QuizService{
-	
-	public Quiz addQuiz(Quiz quiz);
-	public Quiz updateQuiz(Quiz quiz);
-	public Set<Quiz> getAllQuizzes();
-	
-	public Quiz getQuiz(Long quizId);
-	
-	public void deleteQuiz(Long quizId);
-	public List<Quiz> getQuizzesOfCategory(Category category);
-	
-	public List<Quiz> getActiveQuizzes();
-	public List<Quiz> getActiveQuizzesOfCategory(Category category);
+	Quiz addQuiz(Quiz quiz);
+
+	Quiz updateQuiz(Quiz quiz);
+
+	Set<Quiz> getAllQuizzes();
+
+	Quiz getQuiz(String quizId);
+
+	void deleteQuiz(String quizId);
+
+	List<Quiz> getQuizzesOfCategory(String categoryId);
+
+	List<ActiveQuizResponse> getActiveQuizzes();
+
+	List<ActiveQuizResponse> getActiveQuizzesOfCategory(String categoryId);
+	QuizResponse getQuizWithCategory(String quizId);
 }

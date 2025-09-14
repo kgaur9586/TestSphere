@@ -18,43 +18,69 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-update-quiz',
   standalone: true,
-  imports: [MatCardModule,MatFormFieldModule,MatSelectModule,MatIconModule,MatSelectModule,MatListModule,RouterLink,FormsModule,MatFormFieldModule,CommonModule,MatInputModule,MatButtonModule,MatSlideToggleModule],
+  imports: [
+    MatCardModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatIconModule,
+    MatSelectModule,
+    MatListModule,
+    RouterLink,
+    FormsModule,
+    MatFormFieldModule,
+    CommonModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSlideToggleModule,
+  ],
   templateUrl: './update-quiz.component.html',
-  styleUrl: './update-quiz.component.css'
+  styleUrl: './update-quiz.component.css',
 })
-export class UpdateQuizComponent implements OnInit{
+export class UpdateQuizComponent implements OnInit {
   qId = 0;
-  quiz:any;
-  categories : any = null;
-  constructor(private route:ActivatedRoute,private router: Router,private quizService:QuizService,private categoryService:CategoryService){}
-  
-  
+  quiz: any;
+  categories: any = null;
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private quizService: QuizService,
+    private categoryService: CategoryService
+  ) {}
+
   ngOnInit(): void {
-    this.categoryService.categories().subscribe((data : any) =>{
-          this.categories = data;
-        }, (error: any) =>{
-          console.log(error);
-          Swal.fire("Error","Error while loading the categories", 'error');
-        })
+    // this.categoryService.categories().subscribe((data : any) =>{
+    //       this.categories = data;
+    //     }, (error: any) =>{
+    //       console.log(error);
+    //       Swal.fire("Error","Error while loading the categories", 'error');
+    //     })
 
     this.qId = this.route.snapshot.params['qid'];
-    this.quizService.getQuiz(this.qId).subscribe((data) => {
-      this.quiz = data;
-    },(error:any) => {
-      console.log(error);
-    });
+    this.quizService.getQuizWithCategory(this.qId).subscribe(
+      (data) => {
+        console.log('get quiz with category', data);
+        this.quiz = data;
+        if (this.quiz.category && this.quiz.category.id) {
+          this.quiz.categoryId = this.quiz.category.id;
+        }
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
-  public updateQuiz(quiz:any){
-    this.quizService.update(quiz).subscribe((data) => {
-      Swal.fire("Success!!","Quiz is Updated successfully",'success');
-      this.router.navigate(['admin/quiz']);
-    },(error:any) => {
-      console.log(error);
-      Swal.fire("Error!!","Some error occured",'error');
-    })
+  public updateQuiz(quiz: any) {
+    console.log('updating quiz', quiz);
+    this.quizService.update(quiz).subscribe(
+      (data) => {
+        Swal.fire('Success!!', 'Quiz is Updated successfully', 'success');
+        this.router.navigate(['admin/quiz']);
+      },
+      (error: any) => {
+        console.log(error);
+        Swal.fire('Error!!', 'Some error occured', 'error');
+      }
+    );
   }
-  
-
-
 }

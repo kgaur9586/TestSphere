@@ -24,8 +24,8 @@ export class NavbarComponent implements OnInit {
     this.isLoggedIn = this.login.isLoggedIn();
     this.user = this.login.getUser();
 
-    if (this.user?.authorities?.length > 0) {
-      if (this.user.authorities[0].authority === 'Normal') {
+    if (this.user?.roles.length > 0) {
+      if (this.user.roles[0] === 'Normal') {
         this.normalUser = true;
       } else {
         this.admin = true;
@@ -36,8 +36,8 @@ export class NavbarComponent implements OnInit {
       this.isLoggedIn = this.login.isLoggedIn();
       this.user = this.login.getUser();
 
-      if (this.user?.authorities?.length > 0) {
-        if (this.user.authorities[0].authority === 'Normal') {
+      if (this.user?.roles.length > 0) {
+        if (this.user.roles[0] === 'Normal') {
           this.normalUser = true;
           this.admin = false;
         } else {

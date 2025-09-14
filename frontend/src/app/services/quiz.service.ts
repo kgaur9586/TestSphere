@@ -28,6 +28,9 @@ export class QuizService {
   public getQuiz(qid:any){
     return this.http.get(`${baseUrl}/quiz/${qid}`);
   }
+  public getQuizWithCategory(qid:any){
+    return this.http.get(`${baseUrl}/quiz/withCategories/${qid}`);
+  }
 
   public getQuizzesOfCategories(cId:any){
     return this.http.get(`${baseUrl}/quiz/category/${cId}`);

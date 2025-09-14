@@ -1,20 +1,20 @@
 package com.exam.examserver.services;
 
+import java.util.List;
 import java.util.Set;
-
-import org.springframework.stereotype.Service;
 
 import com.exam.examserver.entities.exam.Category;
 
-
 public interface CategoryService {
-	
-	public Category addCategory(Category category);
-	public Category updateCategory(Category category);
-	public Set<Category> getCategories();
-	public Category getCategoryById(Long categoryId);
-	
-	public void deleteCategory(Long categoryId);
-	
 
+	Category addCategory(Category category);
+
+	Category updateCategory(Category category);
+
+	Set<Category> getCategories();
+
+	Category getCategoryById(String categoryId);
+
+	void deleteCategory(String categoryId);
+	List<Category> getAllCategories();
 }
