@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.exam.examserver.entities.exam.QuizAttempt;
+import com.exam.examserver.responseDto.QuizAttemptResponse;
 import com.exam.examserver.services.QuizAttemptService;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class QuizAttemptController {
 	}
 
 	@GetMapping("/{quizId}/attempted-by")
-	public ResponseEntity<List<QuizAttempt>> getAttemptsByQuizId(@PathVariable("quizId") String quizId) {
+	public ResponseEntity<List<QuizAttemptResponse>> getAttemptsByQuizId(@PathVariable("quizId") String quizId) {
 		return ResponseEntity.ok(this.quizAttemptService.getAllAttemptsOfQuiz(quizId));
 	}
 }
