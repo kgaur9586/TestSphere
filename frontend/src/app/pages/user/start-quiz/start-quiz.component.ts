@@ -32,6 +32,7 @@ export class StartQuizComponent implements OnInit {
   interval: any;
   tabExitCount = 0;
   userId:any;
+  quiz: any;
 
   constructor(
     private locationSt: LocationStrategy,
@@ -111,13 +112,16 @@ handleFullScreenChange() {
 
   loadQuestions(qId: any) {
     this.questionService.getQuestionsOfQuizForTest(qId).subscribe(
-      (data) => {
-        if (data) {
-          this.questions = data;
+      (data: any) => {
+        const response = data as QuizApiResponse;
+        if (response && response.questions && response.quiz) {
+          this.quiz = response.quiz;
+          this.questions = response.questions;
           this.timer = this.questions.length * 2 * 60;
           this.startTimer();
         } else {
           this.questions = null;
+          this.quiz = null;
         }
       },
       (error) => {
@@ -169,7 +173,7 @@ handleFullScreenChange() {
         this.marksGot = parseFloat(data.marksGot).toFixed(2);
         this.attempted = data.attempted;
         this.correctAnswers = data.correctAnswers;
-        this.totalMarks = this.questions[0].quiz.maxMarks;
+        this.totalMarks = this.quiz.maxMarks;
         this.isSubmit = true;
       },
       (error) => {
@@ -196,4 +200,9 @@ handleFullScreenChange() {
       });
       
   }
+}
+
+interface QuizApiResponse {
+  quiz: any;
+  questions: any[];
 }

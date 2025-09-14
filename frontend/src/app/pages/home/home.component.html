@@ -1,4 +1,4 @@
-<div mat-list-item class="horizontal-container">
+<div mat-list-item class="horizontal-container" *ngIf="quizzes.length > 0">
     <mat-icon matListItemIcon class="icon">vertical_distribute</mat-icon>
     <h1 class="title"><b>Featured Quizzes</b></h1>
 </div>
@@ -34,7 +34,7 @@
     <button class="scroll-btn right" (click)="scrollRight()">&#10095;</button>
 </div>
 
-<div mat-list-item class="horizontal-container">
+<div mat-list-item class="horizontal-container" *ngIf="categoryQuizzesKeys.length > 0">
     <mat-icon matListItemIcon class="icon">vertical_distribute</mat-icon>
     <h1 class="title"><b>Latest Quizzes by Category</b></h1>
 </div>

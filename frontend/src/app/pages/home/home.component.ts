@@ -13,7 +13,6 @@ import { MatListModule } from '@angular/material/list';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { QuizService } from '../../services/quiz.service';
 import { CategoryService } from '../../services/category.service';
-import { error } from 'console';
 
 @Component({
   selector: 'app-home',
@@ -93,5 +92,9 @@ export class HomeComponent implements OnInit {
       left: 280,
       behavior: 'smooth',
     });
+  }
+
+  get categoryQuizzesKeys(): string[] {
+    return this.categoryQuizzes ? Object.keys(this.categoryQuizzes) : [];
   }
 }

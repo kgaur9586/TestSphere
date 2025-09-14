@@ -23,17 +23,16 @@
             </mat-card>
         </div>
         <div class="col-md-8">
-            <ng-container *ngIf="questions">
-                    <h1>On Going Quiz <b>{{questions[0]?.quiz?.title}}</b></h1>
-                    <mat-card class="timer-card">
-                        <mat-card-content>
-                          <span class="time-label">Time Remaining : </span>
-                          <span class="time-value">{{ getMinutes(timer) }}</span><span class="time-unit">m</span> :
-                          <span class="time-value">{{ timer % 60 }}</span><span class="time-unit">s</span>
-                        </mat-card-content>
-                      </mat-card>
-                      
-                    <mat-progress-bar mode="indeterminate" class="mb20" value="(timer / (questions.length * 2 * 60))*100"></mat-progress-bar>
+            <ng-container *ngIf="questions && quiz">
+                <h1>On Going Quiz <b>{{quiz.title}}</b></h1>
+                <mat-card class="timer-card">
+                    <mat-card-content>
+                      <span class="time-label">Time Remaining : </span>
+                      <span class="time-value">{{ getMinutes(timer) }}</span><span class="time-unit">m</span> :
+                      <span class="time-value">{{ timer % 60 }}</span><span class="time-unit">s</span>
+                    </mat-card-content>
+                </mat-card>
+                <mat-progress-bar mode="indeterminate" class="mb20" [value]="(timer / (questions.length * 2 * 60))*100"></mat-progress-bar>
             </ng-container>
             <mat-card *ngFor="let q of questions;let i = index" class="mt10">
                 <mat-card-content>
