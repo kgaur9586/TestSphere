@@ -27,15 +27,15 @@
                     <div class="user-info">
                       <h3 class="mat-subtitle-1">
                         <mat-icon>person</mat-icon>
-                        {{ attempt[0].firstName }} {{ attempt[0].lastName }}
+                        {{ attempt.user.firstName }} {{ attempt.user.lastName }}
                       </h3>
                       <div class="detail-item">
                         <mat-icon>alternate_email</mat-icon>
-                        <span>{{ attempt[0].email }}</span>
+                        <span>{{ attempt.user.email }}</span>
                       </div>
                       <div class="detail-item">
                         <mat-icon>person_pin</mat-icon>
-                        <span>{{ attempt[0].username }}</span>
+                        <span>{{ attempt.user.username }}</span>
                       </div>
                     </div>
                   </div>
@@ -46,7 +46,7 @@
                       <mat-icon>access_time</mat-icon>
                       <div class="time-text">
                         <span class="attempt-label">Attempted at:</span>
-                        <span class="timestamp">{{ attempt[1] | date:'medium' }}</span>
+                        <span class="timestamp">{{ attempt.attempTime | date:'medium' }}</span>
                       </div>
                     </div>
                   </div>
