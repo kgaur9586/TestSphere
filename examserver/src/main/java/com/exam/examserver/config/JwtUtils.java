@@ -1,22 +1,17 @@
 package com.exam.examserver.config;
 
 import io.jsonwebtoken.*;
-
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import jakarta.annotation.PostConstruct;
 
-import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
-import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-import io.jsonwebtoken.security.Keys;
-import jakarta.annotation.PostConstruct;
-
-import java.security.Key;
 
 @Service
 public class JwtUtils {
@@ -27,7 +22,11 @@ public class JwtUtils {
 
     @PostConstruct
     public void init() {
-        byte[] keyBytes = Base64.getEncoder().encode(SECRET.getBytes());
+        // Ensure the secret is at least 32 characters for HS256
+        if (SECRET.length() < 32) {
+            SECRET = SECRET + "0".repeat(32 - SECRET.length());
+        }
+        byte[] keyBytes = SECRET.getBytes();
         SECRET_KEY = Keys.hmacShaKeyFor(keyBytes);
     }
 
