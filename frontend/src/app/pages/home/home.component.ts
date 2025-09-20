@@ -62,8 +62,8 @@ export class HomeComponent implements OnInit {
   loadQuizzesForCategories() {
     if (!this.category) return;
     this.category.forEach((c: any) => {
-      if (c.cid) {
-        this.quizService.getActiveQuizzesOfCategory(c.cid).subscribe(
+      if (c.id) {
+        this.quizService.getActiveQuizzesOfCategory(c.id).subscribe(
           (data: any) => {
             if (data != null && data.length > 0) {
               this.categoryQuizzes[c.id] = this.categoryQuizzes[c.id] || [];
@@ -76,6 +76,7 @@ export class HomeComponent implements OnInit {
         );
       }
     });
+    console.log("category quizzes - ", this.categoryQuizzes);
   }
 
   @ViewChild('scrollContainer', { static: false }) scrollContainer!: ElementRef;
