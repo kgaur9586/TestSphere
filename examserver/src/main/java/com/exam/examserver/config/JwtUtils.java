@@ -1,6 +1,8 @@
 package com.exam.examserver.config;
 
 import io.jsonwebtoken.*;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -12,16 +14,22 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
+
 import java.security.Key;
 
 @Service
 public class JwtUtils {
 
-    private static final String SECRET = "your_secret_key"; // Use a strong secret
+    @Value("${jwt.secret}")
+    private String SECRET;
+    private Key SECRET_KEY;
 
-
-    private Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-
+    @PostConstruct
+    public void init() {
+        byte[] keyBytes = Base64.getEncoder().encode(SECRET.getBytes());
+        SECRET_KEY = Keys.hmacShaKeyFor(keyBytes);
+    }
 
     public String extractUsername(String token) {
         try {
