@@ -26,7 +26,10 @@
 /media/kapil/DATA/kapil_projects/Exam Portal/examserver/src/main/java/com/exam/examserver/repositories/RoleRepository.java
 /media/kapil/DATA/kapil_projects/Exam Portal/examserver/src/main/java/com/exam/examserver/repositories/UserRepository.java
 /media/kapil/DATA/kapil_projects/Exam Portal/examserver/src/main/java/com/exam/examserver/responseDto/ActiveQuizResponse.java
+/media/kapil/DATA/kapil_projects/Exam Portal/examserver/src/main/java/com/exam/examserver/responseDto/QuestionResponse.java
+/media/kapil/DATA/kapil_projects/Exam Portal/examserver/src/main/java/com/exam/examserver/responseDto/QuizAttemptResponse.java
 /media/kapil/DATA/kapil_projects/Exam Portal/examserver/src/main/java/com/exam/examserver/responseDto/QuizResponse.java
+/media/kapil/DATA/kapil_projects/Exam Portal/examserver/src/main/java/com/exam/examserver/scripts/DataPopulator.java
 /media/kapil/DATA/kapil_projects/Exam Portal/examserver/src/main/java/com/exam/examserver/services/CategoryService.java
 /media/kapil/DATA/kapil_projects/Exam Portal/examserver/src/main/java/com/exam/examserver/services/QuestionService.java
 /media/kapil/DATA/kapil_projects/Exam Portal/examserver/src/main/java/com/exam/examserver/services/QuizAttemptService.java
